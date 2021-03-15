@@ -1,4 +1,3 @@
-
 <template>
     <div>
         <div id="main_echarts" style="width: 600px;height:500px;"></div>

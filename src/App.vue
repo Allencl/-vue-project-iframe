@@ -9,6 +9,7 @@
             <Layout>
                 <Sider hide-trigger :style="{background: '#fff'}">
                   <WisMenu 
+                    :menuData="menuList"
                     @addMenuHandle="addMenuHandle"
                   />
                 </Sider>
@@ -26,6 +27,7 @@
                     >
                         <div class="content-iframe">
                           <iframe 
+                            
                             src="https://www.w3school.com.cn/index.html" 
                             frameborder="0"
                           >
@@ -64,6 +66,7 @@ export default {
   },
   data(_this) {
     return {
+      menuList:[],  // 菜单
       isRefresh:true,  // 刷新
       documentHeight:document.documentElement.clientHeight-(_this.tabsArray?116:68),  // 窗口高度
     }
@@ -81,7 +84,8 @@ export default {
   },   
   created(){
     var that=this;
-
+    
+    this.menuInit();   // 菜单初始化
     // this.$router.push({name:'home',params:{}});
 
     window.onresize = function(){ 
@@ -124,6 +128,41 @@ export default {
 
   },  
   methods:{
+    /**
+     * 菜单 初始化
+     */
+    menuInit: function(){
+      setTimeout(()=>{
+          this.menuList=[
+            {
+              name: "SRM平台",
+              id: "1",
+              children: [
+                  {
+                      id:"1-1",
+                      name: "页面1", 
+                      platform:'',
+                      icon:"logo-buffer",
+                      pathURL:"page1/qwqwq"            
+                  },
+              ]
+            },
+            {
+              name: "质量平台",
+              id: "2",
+              children: [
+                  {
+                      id:"2-1",
+                      name: "页面2", 
+                      platform:'',
+                      icon:"logo-buffer",
+                      pathURL:"page1/qwqwq"            
+                  },
+              ]
+            },            
+          ];
+      },2000);
+    },
     /**
      * 刷新
      */
