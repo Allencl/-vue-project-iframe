@@ -135,36 +135,48 @@ export default {
       setTimeout(()=>{
           this.menuList=[
             {
-              name: "SRM平台",
               id: "1",
+              name: "SRM平台",
+              platform:'srm',
               children: [
                   {
                       id:"1-1",
                       name: "页面1", 
                       platform:'',
                       icon:"logo-buffer",
-                      pathURL:"page1/qwqwq"            
+                      pathName:"page1/qwqwq"            
                   },
               ]
             },
             {
-              name: "质量平台",
               id: "2",
+              name: "W3School",
+              platform:'w3c',
               children: [
                   {
                       id:"2-1",
                       name: "页面2", 
                       platform:'',
                       icon:"logo-buffer",
-                      pathURL:"page1/qwqwq"            
+                      pathName:"page1/qwqwq"            
                   },
               ]
             },            
           ];
+
+          this.$nextTick(()=>{
+            this.iframeInit();
+          });
       },2000);
     },
     /**
-     * 刷新
+     * iframe 初始化
+     */
+    iframeInit: function(){
+      console.log(123);
+    },
+    /**
+     * 刷新 窗口
      */
     updataWindow: function(){
       this.documentHeight=document.documentElement.clientHeight-(this.tabsArray?116:68);  // 窗口高度
