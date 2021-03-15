@@ -19,11 +19,20 @@
                   "
                 >
                     <div class="wis-tabs-container">
-                      <WisTabs 
-
-                      />
+                      <WisTabs />
                     </div>
                     <Content 
+                      :style="{overflow:'auto',height:documentHeight+'px',padding: '8px 8px', minHeight: '280px', background: '#fff'}"
+                    >
+                        <div class="content-iframe">
+                          <iframe 
+                            src="https://www.w3school.com.cn/index.html" 
+                            frameborder="0"
+                          >
+                          </iframe>
+                      </div>
+                    </Content>
+                    <!-- <Content 
                       v-if="isRefresh"
                       :style="{overflow:'auto',height:documentHeight+'px',padding: '8px 8px', minHeight: '280px', background: '#fff'}"
                     >
@@ -31,7 +40,7 @@
                         <router-view v-if='$route.meta.keepAlive'></router-view>
                       </keep-alive>
                       <router-view v-if='!$route.meta.keepAlive'></router-view>
-                    </Content>
+                    </Content> -->
                 </Layout>
             </Layout>
         </Layout>
@@ -73,7 +82,7 @@ export default {
   created(){
     var that=this;
 
-    this.$router.push({name:'home',params:{}});
+    // this.$router.push({name:'home',params:{}});
 
     window.onresize = function(){ 
       that.updataWindow();
@@ -82,33 +91,33 @@ export default {
     /**
      * 页面跳转 监听
      */
-    this.$router.beforeEach((to, from, next) => {
-        let tabsList=that.$store.state.storeTabs.tbasList;
-        let action=tabsList.filter(o=>o["name"]==to['name']);
+    // this.$router.beforeEach((to, from, next) => {
+    //     let tabsList=that.$store.state.storeTabs.tbasList;
+    //     let action=tabsList.filter(o=>o["name"]==to['name']);
 
-        // 已存在 
-        if(action["length"]){
-          that.$store.dispatch("selectTabs",to["name"]);
-        }else{
-          that.$store.dispatch("addTabs",{
-            _this:that,
-            label:(to["meta"]||{})["title"]||"未命名",
-            name:to["name"],
-            icon:"ios-bookmark-outline",
-            params:to["params"]
-          });      
-        }
+    //     // 已存在 
+    //     if(action["length"]){
+    //       that.$store.dispatch("selectTabs",to["name"]);
+    //     }else{
+    //       that.$store.dispatch("addTabs",{
+    //         _this:that,
+    //         label:(to["meta"]||{})["title"]||"未命名",
+    //         name:to["name"],
+    //         icon:"ios-bookmark-outline",
+    //         params:to["params"]
+    //       });      
+    //     }
 
-        // 刷新
-        if( (to["params"]||{})["refresh"] ){
-          that.isRefresh=false;
-          that.$nextTick(()=>{
-            that.isRefresh=true;
-          });
-        }
+    //     // 刷新
+    //     if( (to["params"]||{})["refresh"] ){
+    //       that.isRefresh=false;
+    //       that.$nextTick(()=>{
+    //         that.isRefresh=true;
+    //       });
+    //     }
         
-        next();
-    });
+    //     next();
+    // });
 
   },
   mounted(){
@@ -148,6 +157,15 @@ export default {
       top: 0px;
       left: 0px; 
       height: 46px;
+    }
+
+    .content-iframe{
+        height: 100%;
+
+        iframe{
+          width: 100%;
+          height: 100%;
+        }
     }
   }
 </style>
