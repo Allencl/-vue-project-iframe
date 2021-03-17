@@ -27,8 +27,11 @@
                     >
                         <div class="content-iframe">
                           <iframe 
-                            
-                            src="https://www.w3school.com.cn/index.html" 
+                            v-for="(o,index) in menuList" 
+                            :key="index"
+                            :src="o.platformHttps" 
+                            :ref="o.platformName"
+                            :class="(showPlatform==o.platformName)?'show':''"
                             frameborder="0"
                           >
                           </iframe>
@@ -66,6 +69,7 @@ export default {
   },
   data(_this) {
     return {
+      showPlatform:'',  // 显示的 platform
       menuList:[],  // 菜单
       isRefresh:true,  // 刷新
       documentHeight:document.documentElement.clientHeight-(_this.tabsArray?116:68),  // 窗口高度
@@ -137,28 +141,31 @@ export default {
             {
               id: "1",
               name: "SRM平台",
-              platform:'srm',
+              platformName:'srm',
+              platformHttps:"http://dev.autopus.com.cn:26080/main.html?isLogin=false",
               children: [
                   {
                       id:"1-1",
-                      name: "页面1", 
-                      platform:'',
-                      icon:"logo-buffer",
-                      pathName:"page1/qwqwq"            
+                      name: "srm", 
+                      platformName:'srm',
+                      platformHttps:"http://dev.autopus.com.cn:26080/main.html?isLogin=false",
+                      pathURL:"/platform/page1",          
                   },
               ]
             },
             {
               id: "2",
-              name: "W3School",
-              platform:'w3c',
+              name: "vue 平台",
+              platformName:'vue',
+              platformHttps:"http://182.168.1.221/vuePlatform",
               children: [
                   {
                       id:"2-1",
-                      name: "页面2", 
-                      platform:'',
+                      name: "vue页面1", 
+                      platformName:'vue',
+                      platformHttps:"http://182.168.1.221/vuePlatform",
+                      pathURL:"/platform/page1",            
                       icon:"logo-buffer",
-                      pathName:"page1/qwqwq"            
                   },
               ]
             },            
@@ -167,13 +174,13 @@ export default {
           this.$nextTick(()=>{
             this.iframeInit();
           });
-      },2000);
+      },300);
     },
     /**
      * iframe 初始化
      */
     iframeInit: function(){
-      console.log(123);
+      // console.log(123);
     },
     /**
      * 刷新 窗口
@@ -192,6 +199,10 @@ export default {
         name:option["pathName"],
         icon:option["icon"]
       });
+
+      // 平台页面跳转   
+      this.showPlatform=option["platformName"];  // 显示 iframe
+      top.postMessage(option,option["platformHttps"]);
     },
   },
 }
@@ -212,10 +223,17 @@ export default {
 
     .content-iframe{
         height: 100%;
+        position: relative;
 
         iframe{
+          position: absolute;
+          visibility: hidden;
           width: 100%;
           height: 100%;
+
+          &.show{
+            visibility: inherit;
+          }
         }
     }
   }
