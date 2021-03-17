@@ -167,6 +167,22 @@ export default {
                       pathURL:"/platform/page1",            
                       icon:"logo-buffer",
                   },
+                  {
+                      id:"2-2",
+                      name: "vue页面2", 
+                      platformName:'vue',
+                      platformHttps:"http://182.168.1.221/vuePlatform",
+                      pathURL:"/platform/page2",            
+                      icon:"logo-buffer",
+                  },
+                  {
+                      id:"2-3",
+                      name: "vue页面3", 
+                      platformName:'vue',
+                      platformHttps:"http://182.168.1.221/vuePlatform",
+                      pathURL:"/platform/page3",            
+                      icon:"logo-buffer",
+                  },                                    
               ]
             },            
           ];
@@ -200,9 +216,9 @@ export default {
         icon:option["icon"]
       });
 
-      // 平台页面跳转   
-      this.showPlatform=option["platformName"];  // 显示 iframe
-      top.postMessage(option,option["platformHttps"]);
+      // 平台页面跳转   option["platformHttps"]
+      this.showPlatform=option["platformName"];  // 显示 iframe      
+      this.$refs["vue"][0].contentWindow.postMessage(option,"*");  // 向 iframe 传消息
     },
   },
 }
