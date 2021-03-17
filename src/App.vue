@@ -149,7 +149,7 @@ export default {
                       name: "srm", 
                       platformName:'srm',
                       platformHttps:"http://dev.autopus.com.cn:26080/main.html?isLogin=false",
-                      pathURL:"/platform/page1",          
+                      pathURL:"/srm/platform/page1",          
                   },
               ]
             },
@@ -212,7 +212,7 @@ export default {
       this.$store.dispatch("addTabs",{
         _this:that,
         label:option["name"],
-        name:option["pathName"],
+        name:option["pathURL"],
         icon:option["icon"]
       });
 

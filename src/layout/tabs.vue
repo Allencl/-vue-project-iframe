@@ -54,7 +54,7 @@
        * tab change
        */
       changeTabHandle: function(tabs){
-        this.$router.push({name:tabs,params:{}});
+        // this.$router.push({name:tabs,params:{}});
       },
       /**
        * 删除

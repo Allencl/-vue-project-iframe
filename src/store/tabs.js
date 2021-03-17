@@ -27,7 +27,7 @@ export default {
 				state.tbasList=state.tbasList.concat([option]);
 			}
 
-			that.$router.push({name:option["name"],params:option["params"]||{}});
+			// that.$router.push({name:option["name"],params:option["params"]||{}});
 			state.tabsActiveName=option["name"];			
 		},
 		/**
