@@ -20,7 +20,9 @@
                   "
                 >
                     <div class="wis-tabs-container">
-                      <WisTabs />
+                      <WisTabs 
+                        @changeTabs="changeTabs"
+                      />
                     </div>
                     <Content 
                       :style="{overflow:'auto',height:documentHeight+'px',padding: '8px 8px', minHeight: '280px', background: '#fff'}"
@@ -142,15 +144,24 @@ export default {
               id: "1",
               name: "SRM平台",
               platformName:'srm',
-              platformHttps:"http://dev.autopus.com.cn:26080/main.html?isLogin=false",
+              platformHttps:"http://10.1.12.5:8081/main.html?isLogin=false",
               children: [
-                  {
-                      id:"1-1",
-                      name: "srm", 
-                      platformName:'srm',
-                      platformHttps:"http://dev.autopus.com.cn:26080/main.html?isLogin=false",
-                      pathURL:"/srm/platform/page1",          
-                  },
+                {
+                    id:"1-1",
+                    name: "供应商管",
+                    platformName:'srm',
+                    platformHttps:"http://10.1.12.5:8081/main.html?isLogin=false",
+                    pathURL:"#AtpApp.custom_pp.supplierInfo.supplier.controller.Supplier",
+                    icon:"iconfont icon-gyszysjk white-icon"
+                },
+                {
+                    id:"1-2",
+                    name: "采购项目管理",
+                    platformName:'srm',
+                    platformHttps:"http://10.1.12.5:8081/main.html?isLogin=false",
+                    pathURL:"#AtpApp.custom_pp.project.purchaseproject.controller.Project",
+                    icon:"iconfont icon-cgxmgl white-icon"
+                },
               ]
             },
             {
@@ -193,6 +204,12 @@ export default {
       },300);
     },
     /**
+     * tabs 切换
+     */
+    changeTabs: function(option){
+      this.platformLink(option);
+    },
+    /**
      * iframe 初始化
      */
     iframeInit: function(){
@@ -213,13 +230,23 @@ export default {
         _this:that,
         label:option["name"],
         name:option["pathURL"],
-        icon:option["icon"]
+        icon:option["icon"],
+        menuObj:option
       });
+
+      this.platformLink(option);
+    },
+    /**
+     * 平台 跳转
+     */
+    platformLink: function(option){
+      console.log("页面切换");
+      console.log(option);
 
       // 平台页面跳转   option["platformHttps"]
       this.showPlatform=option["platformName"];  // 显示 iframe      
-      this.$refs["vue"][0].contentWindow.postMessage(option,"*");  // 向 iframe 传消息
-    },
+      this.$refs[option.platformName][0].contentWindow.postMessage(option,"*");  // 向 iframe 传消息
+    }
   },
 }
 </script>

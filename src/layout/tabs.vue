@@ -54,7 +54,8 @@
        * tab change
        */
       changeTabHandle: function(tabs){
-        // this.$router.push({name:tabs,params:{}});
+        let obj=this.tabsArray.filter(o=>o["name"]==tabs)[0];
+        this.$emit("changeTabs",obj["menuObj"]);
       },
       /**
        * 删除
