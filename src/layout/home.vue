@@ -1,7 +1,7 @@
 
 <template>
     <div>
-        <h1>首页</h1>
+        <h1> 首页</h1>
         <div id="main_echarts" style="width: 600px;height:500px;"></div>
     </div>
 </template>
