@@ -26,6 +26,7 @@
                       />
                     </div>
                     <Content 
+                      v-show="showPlatform"
                       :style="{overflow:'auto',height:documentHeight+'px',padding: '8px 8px', minHeight: '280px', background: '#fff'}"
                     >
                         <div class="content-iframe">
@@ -40,15 +41,15 @@
                           </iframe>
                       </div>
                     </Content>
-                    <!-- <Content 
-                      v-else
+                    <Content 
+                      v-show="!showPlatform"
                       :style="{overflow:'auto',height:documentHeight+'px',padding: '8px 8px', minHeight: '280px', background: '#fff'}"
                     >
                       <keep-alive>
                         <router-view v-if='$route.meta.keepAlive'></router-view>
                       </keep-alive>
                       <router-view v-if='!$route.meta.keepAlive'></router-view>
-                    </Content> -->
+                    </Content>
                 </Layout>
             </Layout>
         </Layout>
