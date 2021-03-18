@@ -22,6 +22,7 @@
                     <div class="wis-tabs-container">
                       <WisTabs 
                         @changeTabs="changeTabs"
+                        @goHome="goHome"
                       />
                     </div>
                     <Content 
@@ -40,7 +41,7 @@
                       </div>
                     </Content>
                     <!-- <Content 
-                      v-if="isRefresh"
+                      v-else
                       :style="{overflow:'auto',height:documentHeight+'px',padding: '8px 8px', minHeight: '280px', background: '#fff'}"
                     >
                       <keep-alive>
@@ -135,6 +136,12 @@ export default {
   },  
   methods:{
     /**
+     * 到首页
+    */
+    goHome: function(){
+      this.showPlatform="";
+    },
+    /**
      * 菜单 初始化
      */
     menuInit: function(){
@@ -152,7 +159,7 @@ export default {
                     platformName:'srm',
                     platformHttps:"http://10.1.12.5:8081/main.html?isLogin=false",
                     pathURL:"#AtpApp.custom_pp.supplierInfo.supplier.controller.Supplier",
-                    icon:"iconfont icon-gyszysjk white-icon"
+                    icon:"logo-buffer",                   
                 },
                 {
                     id:"1-2",
@@ -160,7 +167,7 @@ export default {
                     platformName:'srm',
                     platformHttps:"http://10.1.12.5:8081/main.html?isLogin=false",
                     pathURL:"#AtpApp.custom_pp.project.purchaseproject.controller.Project",
-                    icon:"iconfont icon-cgxmgl white-icon"
+                    icon:"logo-buffer",   
                 },
               ]
             },

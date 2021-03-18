@@ -76,6 +76,7 @@
             );
           }else{
             // to home
+            that.$emit("goHome");
             that.$router.push({name:"home",params:{}});
           }
          
@@ -87,6 +88,8 @@
         
         this.$store.dispatch("removeTabsAll",{});
         this.$router.push({name:'home',params:{}});
+        this.$emit("goHome");
+
       }
 
     },
