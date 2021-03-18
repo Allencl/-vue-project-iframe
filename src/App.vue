@@ -4,7 +4,9 @@
     <div class="layout">
         <Layout>
             <Header>
-              <WisHeader />
+              <WisHeader 
+                @goHome="goHome"
+              />
             </Header>
             <Layout>
                 <Sider hide-trigger :style="{background: '#fff'}">

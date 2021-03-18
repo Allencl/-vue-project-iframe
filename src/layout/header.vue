@@ -38,6 +38,8 @@
             toHome: function(){
                 this.$store.dispatch("removeTabsAll",{});
                 this.$router.push({name:'home',params:{}});
+                this.$emit("goHome");
+
             }
         }
     }
