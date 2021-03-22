@@ -205,7 +205,33 @@ export default {
                       icon:"logo-buffer",
                   },                                    
               ]
-            },            
+            },  
+            {
+              id: "3",
+              name: "无路由的平台",
+              platformName:'w3c',
+              platformHttps:"https://www.w3school.com.cn/index.html",
+              children: [
+                  {
+                      id:"3-1",
+                      name: "html", 
+                      platformName:'w3c',
+                      platformHttps:"https://www.w3school.com.cn/index.html",
+                      pathURL:"https://www.w3school.com.cn/html/index.asp",   
+                      notRouter: true,         
+                      icon:"logo-buffer",
+                  },
+                  {
+                      id:"3-2",
+                      name: "css", 
+                      platformName:'w3c',
+                      platformHttps:"https://www.w3school.com.cn/index.html",
+                      pathURL:"https://www.w3school.com.cn/css/index.asp",  
+                      notRouter: true,         
+                      icon:"logo-buffer",
+                  },                                   
+              ]
+            },                      
           ];
 
           this.$nextTick(()=>{
@@ -253,9 +279,17 @@ export default {
       console.log("页面切换");
       console.log(option);
 
-      // 平台页面跳转   option["platformHttps"]
       this.showPlatform=option["platformName"];  // 显示 iframe      
-      this.$refs[option.platformName][0].contentWindow.postMessage(option,"*");  // 向 iframe 传消息
+
+
+      // 有路由的页面
+      if(!option["notRouter"]){
+        // 平台页面跳转   option["platformHttps"]
+        this.$refs[option.platformName][0].contentWindow.postMessage(option,"*");  // 向 iframe 传消息
+      }else{
+        this.$refs[option.platformName][0].src=option["pathURL"];  // 跳转页面
+      }
+
     }
   },
 }
